@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  GameViewController.h
 //  NumberGame
 //
 //  Created by Alen Chang on 14-4-25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface GameViewController : UIViewController
 
 @end

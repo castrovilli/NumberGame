@@ -7,11 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "GameCenterManager.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+     [[GameCenterManager sharedManager] setupManager];
     // Override point for customization after application launch.
     return YES;
 }
