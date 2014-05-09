@@ -165,63 +165,8 @@ BOOL shouldPlaySound = YES;
     } else {
 
         NSInteger pastScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
-        self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
+
         if (self.score > pastScore) {
-
-            if ([self.bestScoreRecord count] < 3) {
-                [self.bestScoreRecord addObject:[NSNumber numberWithInteger:self.score]];
-                UIImage* gameBoardImage = [self.gameboard saveImageWithScale:1.0f];
-
-                NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString* documentsDirectory = [paths lastObject];
-                NSString* filename = [NSString stringWithFormat:@"Photo-%d.jpg", self.score];
-                NSString* photoPath = [documentsDirectory stringByAppendingPathComponent:filename];
-                NSData* data = UIImagePNGRepresentation(gameBoardImage);
-                NSError* error;
-                if (![data writeToFile:photoPath
-                               options:NSDataWritingAtomic
-                                 error:&error]) {
-                    NSLog(@"Error writing file: %@", error);
-                }
-
-                [[NSUserDefaults standardUserDefaults] setObject:self.bestScoreRecord
-                                                          forKey:@"bestScoreRecord"];
-
-            } else {
-
-                NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString* documentsDirectory = [paths lastObject];
-                NSString* filename = [NSString stringWithFormat:@"Photo-%d.jpg", [self.bestScoreRecord[0] integerValue]];
-                NSString* photoPath = [documentsDirectory stringByAppendingPathComponent:filename];
-
-                NSFileManager* fileManager = [NSFileManager defaultManager];
-                if ([fileManager fileExistsAtPath:photoPath]) {
-                    NSError* error;
-                    if (![fileManager removeItemAtPath:photoPath
-                                                 error:&error]) {
-                        NSLog(@"Error removing file: %@", error);
-                    }
-                }
-
-                [self.bestScoreRecord removeObjectAtIndex:0];
-
-                UIImage* gameBoardImage = [self.gameboard saveImageWithScale:1.0f];
-
-                NSString* filenameAdd = [NSString stringWithFormat:@"Photo-%d.jpg", self.score];
-                NSString* photoPathAdd = [documentsDirectory stringByAppendingPathComponent:filenameAdd];
-
-                NSData* data = UIImagePNGRepresentation(gameBoardImage);
-                NSError* error;
-                if (![data writeToFile:photoPathAdd
-                               options:NSDataWritingAtomic
-                                 error:&error]) {
-                    NSLog(@"Error writing file: %@", error);
-                }
-
-                [self.bestScoreRecord addObject:@(self.score)];
-                [[NSUserDefaults standardUserDefaults] setObject:self.bestScoreRecord
-                                                          forKey:@"bestScoreRecord"];
-            }
 
             [[NSUserDefaults standardUserDefaults] setInteger:self.score
                                                        forKey:@"highscore"];
@@ -236,8 +181,7 @@ BOOL shouldPlaySound = YES;
     [self.bestScore setTitleColor:[UIColor whiteColor]
                          forState:UIControlStateNormal];
 
-    NSLog(@"现在的分数是%@", self
-                                 .currentScore.titleLabel.text);
+    NSLog(@"现在的分数是%@", self.currentScore.titleLabel.text);
 }
 
 - (void)_reportScoreToGameCenter
@@ -317,6 +261,7 @@ BOOL shouldPlaySound = YES;
     // This is the earliest point the user can win
 
     if ([self.model userHasWon]) {
+        [self saveBestScoreRecord];
         [self _showGameEndScreenWitnWin:YES];
         [self _playSound:winSound];
     } else {
@@ -328,6 +273,7 @@ BOOL shouldPlaySound = YES;
         }
         // At this point, the user may lose
         if ([self.model userHasLost]) {
+            [self saveBestScoreRecord];
             [self _showGameEndScreenWitnWin:NO];
             [self _playSound:lostSound];
         }
@@ -483,6 +429,82 @@ BOOL shouldPlaySound = YES;
         NSLog(@"从缓存读取的数据啊%@", self.bestScoreRecord);
 
         gameRecord.bestScoreRecord = self.bestScoreRecord;
+    }
+}
+
+/**
+ *  游戏结束时保存当前视图
+ */
+
+- (void)saveBestScoreRecord
+{
+
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]) {
+        self.bestScoreRecord = [[NSMutableArray alloc] init];
+    } else {
+        self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
+        NSLog(@"从缓存初始化数组");
+    }
+
+    NSInteger pastScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
+
+    if (self.score == pastScore) {
+
+        if ([self.bestScoreRecord count] < 3) {
+            [self.bestScoreRecord addObject:[NSNumber numberWithInteger:self.score]];
+            UIImage* gameBoardImage = [self.gameboard saveImageWithScale:1.0f];
+
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString* documentsDirectory = [paths lastObject];
+            NSString* filename = [NSString stringWithFormat:@"Photo-%d.jpg", self.score];
+            NSString* photoPath = [documentsDirectory stringByAppendingPathComponent:filename];
+            NSData* data = UIImagePNGRepresentation(gameBoardImage);
+            NSError* error;
+            if (![data writeToFile:photoPath
+                           options:NSDataWritingAtomic
+                             error:&error]) {
+                NSLog(@"Error writing file: %@", error);
+            }
+
+            [[NSUserDefaults standardUserDefaults] setObject:self.bestScoreRecord
+                                                      forKey:@"bestScoreRecord"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+        } else {
+
+            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString* documentsDirectory = [paths lastObject];
+            NSString* filename = [NSString stringWithFormat:@"Photo-%d.jpg", [self.bestScoreRecord[0] integerValue]];
+            NSString* photoPath = [documentsDirectory stringByAppendingPathComponent:filename];
+
+            NSFileManager* fileManager = [NSFileManager defaultManager];
+            if ([fileManager fileExistsAtPath:photoPath]) {
+                NSError* error;
+                if (![fileManager removeItemAtPath:photoPath
+                                             error:&error]) {
+                    NSLog(@"Error removing file: %@", error);
+                }
+            }
+
+            [self.bestScoreRecord removeObjectAtIndex:0];
+
+            UIImage* gameBoardImage = [self.gameboard saveImageWithScale:1.0f];
+
+            NSString* filenameAdd = [NSString stringWithFormat:@"Photo-%d.jpg", self.score];
+            NSString* photoPathAdd = [documentsDirectory stringByAppendingPathComponent:filenameAdd];
+
+            NSData* data = UIImagePNGRepresentation(gameBoardImage);
+            NSError* error;
+            if (![data writeToFile:photoPathAdd
+                           options:NSDataWritingAtomic
+                             error:&error]) {
+                NSLog(@"Error writing file: %@", error);
+            }
+            [self.bestScoreRecord addObject:@(self.score)];
+            [[NSUserDefaults standardUserDefaults] setObject:self.bestScoreRecord
+                                                      forKey:@"bestScoreRecord"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
 }
 

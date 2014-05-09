@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E81095BB190E059000E6319F /* TileView.m in Sources */ = {isa = PBXBuildFile; fileRef = E81095BA190E059000E6319F /* TileView.m */; };
 		E81095BE190E2DB300E6319F /* GameBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E81095BD190E2DB300E6319F /* GameBoardView.m */; };
+		E81F3EAA191CABE600A21890 /* tile16.png in Resources */ = {isa = PBXBuildFile; fileRef = E81F3EA9191CABE600A21890 /* tile16.png */; };
 		E8565E601915DDDD008F1271 /* GameRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8565E5F1915DDDD008F1271 /* GameRecordViewController.m */; };
 		E8565E6419161359008F1271 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8565E6319161359008F1271 /* GameKit.framework */; };
 		E8565E6619161364008F1271 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8565E6519161364008F1271 /* SystemConfiguration.framework */; };
@@ -64,6 +65,7 @@
 		E81095BA190E059000E6319F /* TileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileView.m; sourceTree = "<group>"; };
 		E81095BC190E2DB300E6319F /* GameBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardView.h; sourceTree = "<group>"; };
 		E81095BD190E2DB300E6319F /* GameBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardView.m; sourceTree = "<group>"; };
+		E81F3EA9191CABE600A21890 /* tile16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile16.png; sourceTree = "<group>"; };
 		E8565E5E1915DDDD008F1271 /* GameRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRecordViewController.h; sourceTree = "<group>"; };
 		E8565E5F1915DDDD008F1271 /* GameRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameRecordViewController.m; sourceTree = "<group>"; };
 		E8565E6319161359008F1271 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -149,7 +151,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		E81F3EA7191C80BD00A21890 /* Views */ = {
+		E81F3EA7191C80BD00A21890 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				E85CD582190A4B98000F7447 /* GameModel.h */,
@@ -159,7 +161,7 @@
 				E81095BC190E2DB300E6319F /* GameBoardView.h */,
 				E81095BD190E2DB300E6319F /* GameBoardView.m */,
 			);
-			name = Views;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		E81F3EA8191C812B00A21890 /* Lib */ = {
@@ -210,7 +212,7 @@
 			children = (
 				E85CD554190A3C69000F7447 /* Main_iPhone.storyboard */,
 				E85CD57D190A44B9000F7447 /* Controllers */,
-				E81F3EA7191C80BD00A21890 /* Views */,
+				E81F3EA7191C80BD00A21890 /* Model */,
 				E81F3EA6191C803600A21890 /* Category */,
 				E81F3EA8191C812B00A21890 /* Lib */,
 				E8EC9C911919D51E005385FC /* Resources */,
@@ -282,6 +284,7 @@
 		E8EC9C911919D51E005385FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E81F3EA9191CABE600A21890 /* tile16.png */,
 				E8EC9C881919D512005385FC /* attach.mp3 */,
 				E881BADB191B16480081F1CC /* lost.mp3 */,
 				E8EC9C891919D512005385FC /* new_tile.mp3 */,
@@ -371,6 +374,7 @@
 			files = (
 				E8EC9C8D1919D512005385FC /* new_tile.mp3 in Resources */,
 				E881BADC191B16480081F1CC /* lost.mp3 in Resources */,
+				E81F3EAA191CABE600A21890 /* tile16.png in Resources */,
 				E8EC9C8F1919D512005385FC /* win.mp3 in Resources */,
 				E85CD55E190A3C69000F7447 /* Images.xcassets in Resources */,
 				E85CD556190A3C69000F7447 /* Main_iPhone.storyboard in Resources */,

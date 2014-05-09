@@ -87,7 +87,7 @@
 
     //上架时添加产品ID
     self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[
-                                                                                             [NSString stringWithFormat:@"I scored %lu points at 2048, a game where you join numbers to score high! https://itunes.apple.com/app/2048-original-gameplay/id848513715", (long)self.score]
+                                                                                            [NSString stringWithFormat:@"I scored %lu points at 2048, a game where you join numbers to score high! https://itunes.apple.com/app/2048-original-gameplay/id848513715", (long)self.score],[UIImage imageNamed:@"tile16"]
                                                                                           ]
                                                                     applicationActivities:nil];
     [self presentViewController:self.activityViewController

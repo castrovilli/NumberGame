@@ -223,7 +223,8 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
                                           @"high! "
                                           @"https://itunes.apple.com/app/"
                                           @"2048-original-gameplay/id848513715",
-                                          (long)self.score]
+                                          (long)self.score],
+               [UIImage imageNamed:@"tile16"]
             ]
         applicationActivities:nil];
     [self presentViewController:self.activityViewController
@@ -263,5 +264,7 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
     [self dismissViewControllerAnimated:YES
                              completion:nil];
 }
+
+
 
 @end
