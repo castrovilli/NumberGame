@@ -99,8 +99,8 @@
 		E8617E201919BF3200AA3DA4 /* GameSetUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetUpViewController.h; sourceTree = "<group>"; };
 		E8617E211919BF3200AA3DA4 /* GameSetUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetUpViewController.m; sourceTree = "<group>"; };
 		E881BADB191B16480081F1CC /* lost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lost.mp3; sourceTree = "<group>"; };
-		E8E61C00191A366C00BF1DD4 /* UIView+saveImageWithScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+saveImageWithScale.h"; sourceTree = "<group>"; };
-		E8E61C01191A366C00BF1DD4 /* UIView+saveImageWithScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+saveImageWithScale.m"; sourceTree = "<group>"; };
+		E8E61C00191A366C00BF1DD4 /* UIView+saveImageWithScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+saveImageWithScale.h"; path = "NumberGame/UIView+saveImageWithScale.h"; sourceTree = "<group>"; };
+		E8E61C01191A366C00BF1DD4 /* UIView+saveImageWithScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+saveImageWithScale.m"; path = "NumberGame/UIView+saveImageWithScale.m"; sourceTree = "<group>"; };
 		E8E61C03191A36EF00BF1DD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E8EC9C881919D512005385FC /* attach.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attach.mp3; sourceTree = "<group>"; };
 		E8EC9C891919D512005385FC /* new_tile.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = new_tile.mp3; sourceTree = "<group>"; };
@@ -139,6 +139,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E81F3EA6191C803600A21890 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E8E61C00191A366C00BF1DD4 /* UIView+saveImageWithScale.h */,
+				E8E61C01191A366C00BF1DD4 /* UIView+saveImageWithScale.m */,
+			);
+			name = Category;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		E81F3EA7191C80BD00A21890 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E85CD582190A4B98000F7447 /* GameModel.h */,
+				E85CD583190A4B98000F7447 /* GameModel.m */,
+				E81095B9190E059000E6319F /* TileView.h */,
+				E81095BA190E059000E6319F /* TileView.m */,
+				E81095BC190E2DB300E6319F /* GameBoardView.h */,
+				E81095BD190E2DB300E6319F /* GameBoardView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E81F3EA8191C812B00A21890 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				E8617E131919BE3500AA3DA4 /* GC Manager */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
 		E85CD536190A3C69000F7447 = {
 			isa = PBXGroup;
 			children = (
@@ -177,12 +208,12 @@
 		E85CD548190A3C69000F7447 /* NumberGame */ = {
 			isa = PBXGroup;
 			children = (
-				E8EC9C911919D51E005385FC /* Resources */,
-				E8617E131919BE3500AA3DA4 /* GC Manager */,
-				E85CD551190A3C69000F7447 /* AppDelegate.h */,
-				E85CD552190A3C69000F7447 /* AppDelegate.m */,
 				E85CD554190A3C69000F7447 /* Main_iPhone.storyboard */,
-				E85CD57D190A44B9000F7447 /* Classes */,
+				E85CD57D190A44B9000F7447 /* Controllers */,
+				E81F3EA7191C80BD00A21890 /* Views */,
+				E81F3EA6191C803600A21890 /* Category */,
+				E81F3EA8191C812B00A21890 /* Lib */,
+				E8EC9C911919D51E005385FC /* Resources */,
 				E85CD549190A3C69000F7447 /* Supporting Files */,
 				E85CD55D190A3C69000F7447 /* Images.xcassets */,
 			);
@@ -192,6 +223,8 @@
 		E85CD549190A3C69000F7447 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E85CD551190A3C69000F7447 /* AppDelegate.h */,
+				E85CD552190A3C69000F7447 /* AppDelegate.m */,
 				E85CD54A190A3C69000F7447 /* NumberGame-Info.plist */,
 				E85CD54B190A3C69000F7447 /* InfoPlist.strings */,
 				E85CD54E190A3C69000F7447 /* main.m */,
@@ -218,27 +251,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E85CD57D190A44B9000F7447 /* Classes */ = {
+		E85CD57D190A44B9000F7447 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				E8565E5E1915DDDD008F1271 /* GameRecordViewController.h */,
 				E8565E5F1915DDDD008F1271 /* GameRecordViewController.m */,
 				E85CD57A190A4093000F7447 /* GameViewController.h */,
 				E85CD57B190A4093000F7447 /* GameViewController.m */,
-				E85CD582190A4B98000F7447 /* GameModel.h */,
-				E85CD583190A4B98000F7447 /* GameModel.m */,
-				E81095B9190E059000E6319F /* TileView.h */,
-				E81095BA190E059000E6319F /* TileView.m */,
-				E81095BC190E2DB300E6319F /* GameBoardView.h */,
-				E81095BD190E2DB300E6319F /* GameBoardView.m */,
 				E8F0439C1910972F009DC378 /* GameEndViewController.h */,
 				E8F0439D1910972F009DC378 /* GameEndViewController.m */,
 				E8617E201919BF3200AA3DA4 /* GameSetUpViewController.h */,
 				E8617E211919BF3200AA3DA4 /* GameSetUpViewController.m */,
-				E8E61C00191A366C00BF1DD4 /* UIView+saveImageWithScale.h */,
-				E8E61C01191A366C00BF1DD4 /* UIView+saveImageWithScale.m */,
 			);
-			name = Classes;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		E8617E131919BE3500AA3DA4 /* GC Manager */ = {
