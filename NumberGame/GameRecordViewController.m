@@ -8,6 +8,7 @@
 
 #import "GameRecordViewController.h"
 #import "GameBoardView.h"
+#import "AppHelper.h"
 
 NSString* const kShareButtonHorizontal = @"H:|-50-[shareButton(220)]-50-|";
 NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
@@ -80,8 +81,9 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
         [gameBoardBackgroundView addSubview:gamaBoardView];
 
         UILabel* scoreLabel =
-            [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-        scoreLabel.center = CGPointMake(self.scrollView.center.x, 45);
+            [[UILabel alloc] init];
+        scoreLabel.frame = [AppHelper isPhone] ? CGRectMake(0, 0, 80, 80) : CGRectMake(0, 0, 120, 120);
+        scoreLabel.center = [AppHelper isPhone] ? CGPointMake(self.scrollView.center.x, 45) : CGPointMake(self.scrollView.center.x, 70);
         scoreLabel.numberOfLines = 2;
         [scoreLabel setTextAlignment:NSTextAlignmentCenter];
         NSString* str1 = NSLocalizedString(@"Score", @"得分");
@@ -94,7 +96,8 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
                                                       blue:182.0f / 255
                                                      alpha:1.0f];
         scoreLabel.textColor = [UIColor whiteColor];
-        scoreLabel.layer.cornerRadius = 40.0f;
+        
+        scoreLabel.layer.cornerRadius = [AppHelper isPhone] ? 40.0f : 60.0f;
         scoreLabel.clipsToBounds = YES;
         scoreLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                           size:16];

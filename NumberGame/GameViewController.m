@@ -14,6 +14,7 @@
 #import "GameCenterManager.h"
 #import "GameSetUpViewController.h"
 #import "UIView+saveImageWithScale.h"
+#import "AppHelper.h"
 
 #define LeaderBoardName @"com.self.NumberGame.leaderboard"
 BOOL shouldPlaySound = YES;
@@ -64,9 +65,9 @@ BOOL shouldPlaySound = YES;
 
     [self _setupGestureRecognizers];
 
-    self.currentScore.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                        size:16];
-    self.currentScore.layer.cornerRadius = 37.5f;
+    self.currentScore.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:13] : [UIFont fontWithName:@"AvenirNext-Heavy" size:23];
+    self.currentScore.layer.cornerRadius = [AppHelper isPhone] ? 37.5f : 60.0f;
+    
     self.currentScore.titleLabel.textColor = [UIColor whiteColor];
        self.currentScore.titleLabel.numberOfLines = 2;
     self.currentScore.backgroundColor = [UIColor colorWithRed:136.0f / 255
@@ -78,18 +79,17 @@ BOOL shouldPlaySound = YES;
     [self.currentScore.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self _setScore:0];
 
-    self.appName.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                   size:23];
-    self.appName.layer.cornerRadius = 40.0f;
+    self.appName.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:23] : [UIFont fontWithName:@"AvenirNext-Heavy" size:27];
+
+    self.appName.layer.cornerRadius = [AppHelper isPhone] ? 40.0f : 65.0f;
     self.appName.backgroundColor = [UIColor colorWithRed:93.0f / 255
                                                    green:223.0f / 255
                                                     blue:1.0f
                                                    alpha:1.0f];
     self.appName.tintColor = [UIColor whiteColor];
 
-    self.bestScore.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                     size:16];
-    self.bestScore.layer.cornerRadius = 37.5f;
+    self.bestScore.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:13] : [UIFont fontWithName:@"AvenirNext-Heavy" size:23];
+    self.bestScore.layer.cornerRadius = [AppHelper isPhone] ? 37.5f : 60.0f;
 
     self.bestScore.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                      green:173.0f / 255
@@ -99,8 +99,8 @@ BOOL shouldPlaySound = YES;
     self.bestScore.contentMode = UIViewContentModeScaleToFill;
     [self.bestScore.titleLabel setTextAlignment:NSTextAlignmentCenter];
 
-    self.nextGoalScore.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                              size:13];
+    self.nextGoalScore.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:13] : [UIFont fontWithName:@"AvenirNext-Heavy" size:25];
+
     self.nextGoalScore.textColor = [UIColor colorWithRed:136.0f / 255
                                                    green:173.0f / 255
                                                     blue:182.0f / 255
@@ -167,8 +167,6 @@ BOOL shouldPlaySound = YES;
     NSString *str = NSLocalizedString(@"Score", @"得分");
     [self.currentScore setTitle:[NSString stringWithFormat:@"%li\n%@",(long)score,str]
                        forState:UIControlStateNormal];
-//    [self.currentScore setTitleColor:[UIColor whiteColor]
-//                            forState:UIControlStateNormal];
 
     if (![[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"]) {
 
@@ -390,8 +388,8 @@ BOOL shouldPlaySound = YES;
                                                green:173.0f / 255
                                                 blue:182.0f / 255
                                                alpha:1.0];
-    CGFloat cellWidth = 60;
-    CGFloat cellPadding = 12;
+    CGFloat cellWidth = [AppHelper isPhone] ? 60 : 110;
+    CGFloat cellPadding = [AppHelper isPhone] ? 12 : 24;
     GameBoardView* gameboard = [GameBoardView gameboardWithDimension:4
                                                            cellWidth:cellWidth
                                                          cellPadding:cellPadding
@@ -401,8 +399,10 @@ BOOL shouldPlaySound = YES;
                                                                                       blue:203.0f / 255
                                                                                      alpha:1.0]];
     gameboard.layer.cornerRadius = 50.0;
-
     [self.gameBoardBackgroundView addSubview:gameboard];
+    if (![AppHelper isPhone]) {
+            gameboard.center = CGPointMake(self.gameBoardBackgroundView.center.x, self.gameBoardBackgroundView.center.y - gameboard.frame.size.height/2);
+    }
 
     self.gameBoardBackgroundView.backgroundColor = [UIColor colorWithRed:232.0f / 255
                                                                    green:251.0f / 255

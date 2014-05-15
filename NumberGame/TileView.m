@@ -7,6 +7,7 @@
 //
 
 #import "TileView.h"
+#import "AppHelper.h"
 
 @interface TileView ()
 
@@ -44,8 +45,9 @@
                                                                frame.size.width,
                                                                frame.size.height)];
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                 size:15];
+    label.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                       size:13] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                  size:29];
     ;
     label.layer.cornerRadius = frame.size.width / 2.0f;
     label.clipsToBounds = YES;

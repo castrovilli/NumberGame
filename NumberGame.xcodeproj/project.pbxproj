@@ -48,6 +48,8 @@
 		E8617E221919BF3200AA3DA4 /* GameSetUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8617E211919BF3200AA3DA4 /* GameSetUpViewController.m */; };
 		E8617E231919BF3200AA3DA4 /* GameSetUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8617E211919BF3200AA3DA4 /* GameSetUpViewController.m */; };
 		E881BADC191B16480081F1CC /* lost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E881BADB191B16480081F1CC /* lost.mp3 */; };
+		E8B8EC54192455AD007650C7 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8B8EC52192455AD007650C7 /* Main_iPad.storyboard */; };
+		E8B8EC9C192459BC007650C7 /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B8EC9B192459BC007650C7 /* AppHelper.m */; };
 		E8E61C02191A366C00BF1DD4 /* UIView+saveImageWithScale.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E61C01191A366C00BF1DD4 /* UIView+saveImageWithScale.m */; };
 		E8E61C04191A36EF00BF1DD4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E61C03191A36EF00BF1DD4 /* QuartzCore.framework */; };
 		E8EC9C8B1919D512005385FC /* attach.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8EC9C881919D512005385FC /* attach.mp3 */; };
@@ -134,6 +136,9 @@
 		E8617E201919BF3200AA3DA4 /* GameSetUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetUpViewController.h; sourceTree = "<group>"; };
 		E8617E211919BF3200AA3DA4 /* GameSetUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetUpViewController.m; sourceTree = "<group>"; };
 		E881BADB191B16480081F1CC /* lost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lost.mp3; sourceTree = "<group>"; };
+		E8B8EC53192455AD007650C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		E8B8EC9A192459BC007650C7 /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
+		E8B8EC9B192459BC007650C7 /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHelper.m; sourceTree = "<group>"; };
 		E8E61C00191A366C00BF1DD4 /* UIView+saveImageWithScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+saveImageWithScale.h"; path = "NumberGame/UIView+saveImageWithScale.h"; sourceTree = "<group>"; };
 		E8E61C01191A366C00BF1DD4 /* UIView+saveImageWithScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+saveImageWithScale.m"; path = "NumberGame/UIView+saveImageWithScale.m"; sourceTree = "<group>"; };
 		E8E61C03191A36EF00BF1DD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -281,9 +286,11 @@
 		E85CD548190A3C69000F7447 /* NumberGame */ = {
 			isa = PBXGroup;
 			children = (
+				E8B8EC99192459BC007650C7 /* Helpers */,
 				E8294A191923946500C80D62 /* CJPAdController */,
 				E8294A1C1923946500C80D62 /* GoogleAdMobAdsSdk */,
 				E85CD554190A3C69000F7447 /* Main_iPhone.storyboard */,
+				E8B8EC52192455AD007650C7 /* Main_iPad.storyboard */,
 				E85CD57D190A44B9000F7447 /* Controllers */,
 				E81F3EA7191C80BD00A21890 /* Model */,
 				E81F3EA6191C803600A21890 /* Category */,
@@ -355,6 +362,15 @@
 				E8617E191919BE3500AA3DA4 /* Reachability.m */,
 			);
 			path = "GC Manager";
+			sourceTree = "<group>";
+		};
+		E8B8EC99192459BC007650C7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E8B8EC9A192459BC007650C7 /* AppHelper.h */,
+				E8B8EC9B192459BC007650C7 /* AppHelper.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		E8EC9C911919D51E005385FC /* Resources */ = {
@@ -452,6 +468,7 @@
 				E8EC9C8D1919D512005385FC /* new_tile.mp3 in Resources */,
 				E881BADC191B16480081F1CC /* lost.mp3 in Resources */,
 				E81F3EAA191CABE600A21890 /* tile16.png in Resources */,
+				E8B8EC54192455AD007650C7 /* Main_iPad.storyboard in Resources */,
 				E8EC9C8F1919D512005385FC /* win.mp3 in Resources */,
 				E8294A2A1923946600C80D62 /* README.txt in Resources */,
 				E833501919238B87002B1257 /* Localizable.strings in Resources */,
@@ -487,6 +504,7 @@
 				E8F0439E1910972F009DC378 /* GameEndViewController.m in Sources */,
 				E85CD57C190A4093000F7447 /* GameViewController.m in Sources */,
 				E833501519238373002B1257 /* GameTeachViewController.m in Sources */,
+				E8B8EC9C192459BC007650C7 /* AppHelper.m in Sources */,
 				E8617E221919BF3200AA3DA4 /* GameSetUpViewController.m in Sources */,
 				E81095BB190E059000E6319F /* TileView.m in Sources */,
 				E8565E601915DDDD008F1271 /* GameRecordViewController.m in Sources */,
@@ -553,6 +571,14 @@
 				E85CD56E190A3C69000F7447 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E8B8EC52192455AD007650C7 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E8B8EC53192455AD007650C7 /* Base */,
+			);
+			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -642,14 +668,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NumberGame/NumberGame-Prefix.pch";
 				INFOPLIST_FILE = "NumberGame/NumberGame-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NumberGame/GoogleAdMobAdsSdk",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -662,14 +688,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NumberGame/NumberGame-Prefix.pch";
 				INFOPLIST_FILE = "NumberGame/NumberGame-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NumberGame/GoogleAdMobAdsSdk",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
