@@ -1,0 +1,45 @@
+
+/* Class = "IBUIButton"; normalTitle = "HOW TO PLAY"; ObjectID = "3LC-j7-I18"; */
+"3LC-j7-I18.normalTitle" = "游戏教程";
+
+/* Class = "IBUIButton"; normalTitle = "Button"; ObjectID = "49M-lg-5HV"; */
+"49M-lg-5HV.normalTitle" = "Button";
+
+/* Class = "IBUIButton"; normalTitle = "NEW GAME"; ObjectID = "7KM-mu-IHz"; */
+"7KM-mu-IHz.normalTitle" = "新游戏";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "9Ix-dA-TN1"; */
+"9Ix-dA-TN1.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "SHARE"; ObjectID = "9Xu-Zd-XcR"; */
+"9Xu-Zd-XcR.normalTitle" = "分享";
+
+/* Class = "IBUILabel"; text = "Options"; ObjectID = "CCu-Sg-dIe"; */
+"CCu-Sg-dIe.text" = "选项";
+
+/* Class = "IBUIButton"; normalTitle = "1536"; ObjectID = "DOu-0u-lZT"; */
+"DOu-0u-lZT.normalTitle" = "1536";
+
+/* Class = "IBUIButton"; normalTitle = "RATE"; ObjectID = "Jff-Ur-ICS"; */
+"Jff-Ur-ICS.normalTitle" = "给好评";
+
+/* Class = "IBUILabel"; text = "SWIPE TO MOVE ALL TILES"; ObjectID = "KXr-Mh-ema"; */
+"KXr-Mh-ema.text" = "滑动手指移动所以方块";
+
+/* Class = "IBUIButton"; normalTitle = "NEW GAME"; ObjectID = "LGz-6S-Xm7"; */
+"LGz-6S-Xm7.normalTitle" = "新游戏";
+
+/* Class = "IBUIButton"; normalTitle = "MENU"; ObjectID = "OO5-dG-1fV"; */
+"OO5-dG-1fV.normalTitle" = "菜单";
+
+/* Class = "IBUILabel"; text = "IT'S OVER WHEN THE BOARD FILLS UP"; ObjectID = "Ou0-av-huB"; */
+"Ou0-av-huB.text" = "当格子内填满数字,游戏失败";
+
+/* Class = "IBUILabel"; text = "WHEN TWO TILES WITH THE SAME NUMBER"; ObjectID = "goI-rx-bIn"; */
+"goI-rx-bIn.text" = "当两个数字相同的方块相遇时,就会合并为两数之和";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "srV-7a-vfK"; */
+"srV-7a-vfK.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "KEEP GOING"; ObjectID = "xIz-uz-ius"; */
+"xIz-uz-ius.normalTitle" = "继续";

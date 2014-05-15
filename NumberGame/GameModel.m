@@ -477,57 +477,57 @@ typedef enum {
 
 //根据游戏板上已有数字判断下一次目标,然后设置对应label文字提示
 
-- (NSUInteger)currentBiggestNumber
-{
-    NSInteger goalScore = 0;
-    NSUInteger biggestNumber = 0;
-    NSMutableArray* tempArray = [NSMutableArray arrayWithArray:self.gameState];
-    for (NSInteger j = 1; j <= [tempArray count]; j++) {
-
-        for (NSInteger i = 0; i < j; i++) {
-            if (i == [tempArray count] - 1) {
-                break;
-            }
-
-            NSUInteger v1 = ((Tile*)tempArray[i]).value;
-            NSUInteger v2 = ((Tile*)tempArray[i + 1]).value;
-
-            if (v1 > v2) {
-                [tempArray exchangeObjectAtIndex:i
-                               withObjectAtIndex:i + 1];
-            }
-        }
-    }
-    biggestNumber = ((Tile*)[tempArray lastObject]).value;
-
-    //    if (biggestNumber < 48) {
-    //        goalScore = 48;
-    //    }
-    //    else if (biggestNumber < 96) {
-    //        goalScore = 96;
-    //    }
-    //    else if (biggestNumber < 192) {
-    //        goalScore = 192;
-    //    }
-    //    else if (biggestNumber < 384) {
-    //        goalScore = 384;
-    //    }
-    //    else if (biggestNumber < 768) {
-    //        goalScore = 768;
-    //    }
-    //    else
-    if (biggestNumber < 1536) {
-        goalScore = 1536;
-    } else if (biggestNumber < 3072) {
-        goalScore = 3072;
-    } else if (biggestNumber < 6144) {
-        goalScore = 6144;
-    } else if (biggestNumber < 12288) {
-        goalScore = 12288;
-    }
-
-    return goalScore;
-}
+//- (NSUInteger)currentBiggestNumber
+//{
+//    NSInteger goalScore = 0;
+//    NSUInteger biggestNumber = 0;
+//    NSMutableArray* tempArray = [NSMutableArray arrayWithArray:self.gameState];
+//    for (NSInteger j = 1; j <= [tempArray count]; j++) {
+//
+//        for (NSInteger i = 0; i < j; i++) {
+//            if (i == [tempArray count] - 1) {
+//                break;
+//            }
+//
+//            NSUInteger v1 = ((Tile*)tempArray[i]).value;
+//            NSUInteger v2 = ((Tile*)tempArray[i + 1]).value;
+//
+//            if (v1 > v2) {
+//                [tempArray exchangeObjectAtIndex:i
+//                               withObjectAtIndex:i + 1];
+//            }
+//        }
+//    }
+//    biggestNumber = ((Tile*)[tempArray lastObject]).value;
+//
+//    //    if (biggestNumber < 48) {
+//    //        goalScore = 48;
+//    //    }
+//    //    else if (biggestNumber < 96) {
+//    //        goalScore = 96;
+//    //    }
+//    //    else if (biggestNumber < 192) {
+//    //        goalScore = 192;
+//    //    }
+//    //    else if (biggestNumber < 384) {
+//    //        goalScore = 384;
+//    //    }
+//    //    else if (biggestNumber < 768) {
+//    //        goalScore = 768;
+//    //    }
+//    //    else
+//    if (biggestNumber < 1536) {
+//        goalScore = 1536;
+//    } else if (biggestNumber < 3072) {
+//        goalScore = 3072;
+//    } else if (biggestNumber < 6144) {
+//        goalScore = 6144;
+//    } else if (biggestNumber < 12288) {
+//        goalScore = 12288;
+//    }
+//
+//    return goalScore;
+//}
 
 - (BOOL)userHasWon
 {

@@ -11,6 +11,8 @@
 
 NSString* const kShareButtonHorizontal = @"H:|-50-[shareButton(220)]-50-|";
 NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
+NSString* const kContinueButtonHorizontal = @"H:|-50-[continueButton(220)]-50-|";
+NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]";
 
 @interface GameRecordViewController () <UIScrollViewDelegate>
 
@@ -65,8 +67,8 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
             NSDocumentDirectory, NSUserDomainMask, YES);
         NSString* documentsDirectory = [paths lastObject];
         NSString* filename =
-            [NSString stringWithFormat:@"Photo-%d.jpg",
-                                       [self.bestScoreRecord[i] integerValue]];
+            [NSString stringWithFormat:@"Photo-%ld.png",
+                                       (long)[self.bestScoreRecord[i] integerValue]];
         NSString* photoPath =
             [documentsDirectory stringByAppendingPathComponent:filename];
 
@@ -82,8 +84,11 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
         scoreLabel.center = CGPointMake(self.scrollView.center.x, 45);
         scoreLabel.numberOfLines = 2;
         [scoreLabel setTextAlignment:NSTextAlignmentCenter];
-        scoreLabel.text = [NSString
-            stringWithFormat:@"Best\n%d", [self.bestScoreRecord[i] integerValue]];
+        NSString* str1 = NSLocalizedString(@"Score", @"得分");
+        scoreLabel.text = [str1 stringByAppendingFormat:@"\n%ld", (long)[self.bestScoreRecord[i] integerValue]];
+
+        scoreLabel.contentMode = UIViewContentModeScaleAspectFit;
+
         scoreLabel.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                      green:173.0f / 255
                                                       blue:182.0f / 255
@@ -92,7 +97,7 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
         scoreLabel.layer.cornerRadius = 40.0f;
         scoreLabel.clipsToBounds = YES;
         scoreLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                          size:23];
+                                          size:16];
 
         [gameBoardBackgroundView addSubview:scoreLabel];
 
@@ -110,7 +115,7 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
                             alpha:1];
 
         shareButton.titleLabel.textColor = [UIColor whiteColor];
-        [shareButton setTitle:@"SHARE"
+        [shareButton setTitle:NSLocalizedString(@"SHARE", @"分享")
                      forState:UIControlStateNormal];
         shareButton.layer.cornerRadius = 20.0f;
         [shareButton addTarget:self
@@ -136,6 +141,7 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
                                                                                  options:0
                                                                                  metrics:nil
                                                                                    views:viewsDictionary]];
+
         [self.view addConstraints:constraints];
     }
 
@@ -151,11 +157,15 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
                                            green:173.0f / 255
                                             blue:182.0f / 255
                                            alpha:1.0f];
-    titleLabel.text = @"Your High Scores";
+    titleLabel.text = NSLocalizedString(@"Your High Scores", @"您的最高分");
     titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                       size:23];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.center = CGPointMake(self.scrollView.center.x, 50);
+    titleLabel.backgroundColor = [UIColor colorWithRed:232.0f / 255
+                                                 green:251.0f / 255
+                                                  blue:1.0f
+                                                 alpha:1.0f];
     [gameBoardBackgroundView addSubview:titleLabel];
 
     UILabel* tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
@@ -167,38 +177,57 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
     tipsLabel.textAlignment = NSTextAlignmentCenter;
     tipsLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                      size:17];
-    NSString* tips = @"Swipe left to see your 3 latest scores.Share with your friends or keep going.";
+    NSString* tips = NSLocalizedString(@"Swipe left to see your 3 latest scores.Share with your friends or keep going.", @"滑至左侧以查看您最近3次的最高分,分享给你的朋友或继续");
     CGSize size = [tips sizeWithFont:tipsLabel.font
                    constrainedToSize:CGSizeMake(tipsLabel.frame.size.width, MAXFLOAT)
                        lineBreakMode:NSLineBreakByWordWrapping];
     [tipsLabel setFrame:CGRectMake(0, 0, 280, size.height)];
+    tipsLabel.backgroundColor = [UIColor colorWithRed:232.0f / 255
+                                                green:251.0f / 255
+                                                 blue:1.0f
+                                                alpha:1.0f];
     tipsLabel.text = tips;
     tipsLabel.center = self.scrollView.center;
     [gameBoardBackgroundView addSubview:tipsLabel];
 
-    UIButton* cotinueButton =
-        [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 220, 50)];
-    cotinueButton.center = CGPointMake(self.scrollView.center.x, 400);
-    cotinueButton.layer.cornerRadius = 20.0f;
-    cotinueButton.titleLabel.font =
+    UIButton* continueButton =
+        [[UIButton alloc] init];
+    continueButton.translatesAutoresizingMaskIntoConstraints = NO;
+    continueButton.center = CGPointMake(self.scrollView.center.x, 400);
+   continueButton.layer.cornerRadius = 20.0f;
+   continueButton.titleLabel.font =
         [UIFont fontWithName:@"AvenirNext-Heavy"
                         size:23];
-    cotinueButton.backgroundColor =
+    continueButton.backgroundColor =
         [UIColor colorWithRed:0.0f
                         green:204.0f / 255
                          blue:1.0f
                         alpha:1.0];
-    cotinueButton.titleLabel.textColor = [UIColor whiteColor];
-    [cotinueButton setTitle:@"KEEP GOING"
+    continueButton.titleLabel.textColor = [UIColor whiteColor];
+    [continueButton setTitle:NSLocalizedString(@"KEEP GOING", @"继续")
                    forState:UIControlStateNormal];
-    cotinueButton.layer.cornerRadius = 20.0f;
-    [cotinueButton addTarget:self
+    continueButton.layer.cornerRadius = 20.0f;
+    [continueButton addTarget:self
                       action:@selector(continueGame)
             forControlEvents:UIControlEventTouchUpInside];
 
-    [gameBoardBackgroundView addSubview:cotinueButton];
+    [gameBoardBackgroundView addSubview:continueButton];
 
     [self.scrollView addSubview:gameBoardBackgroundView];
+
+    NSDictionary* viewsDictionary2 = NSDictionaryOfVariableBindings(continueButton, _pageControl);
+
+    NSMutableArray* constraints2 = [[NSMutableArray alloc] init];
+    [constraints2 addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:kContinueButtonVertical
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:viewsDictionary2]];
+    [constraints2 addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:kContinueButtonHorizontal
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewsDictionary2]];
+
+    [self.view addConstraints:constraints2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -214,17 +243,31 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
 
 - (void)openShare
 {
+
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(
+        NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths lastObject];
+    NSLog(@"%@", self.bestScoreRecord[self.pageControl.currentPage]);
+    NSString* filename =
+        [NSString stringWithFormat:@"Share-%ld@2x.png",
+                                   (long)[self.bestScoreRecord[self.pageControl.currentPage] integerValue]];
+
+    NSString* photoPath =
+        [documentsDirectory stringByAppendingPathComponent:filename];
+
+    UIImage* recordImage = [UIImage imageWithContentsOfFile:photoPath];
+
     //上架时添加产品ID
+
+    NSString* str1 = NSLocalizedString(@"I scored", @"我在1536得了");
+    NSString* str2 = NSLocalizedString(@"points at 1536, a game where you join numbers to score high! https://itunes.apple.com/app/2048-original-gameplay/id848513715", @"分,这个游戏规则为合并数字得到最高分! https://itunes.apple.com/app/2048-original-gameplay/id848513715");
+    NSString* str3 = [str1 stringByAppendingFormat:@"%lu", (long)self.score];
+    NSString* str4 = [str3 stringByAppendingString:str2];
     self.activityViewController = [[UIActivityViewController alloc]
         initWithActivityItems:
             @[
-               [NSString stringWithFormat:@"I scored %lu points at 2048, a game "
-                                          @"where you join numbers to score "
-                                          @"high! "
-                                          @"https://itunes.apple.com/app/"
-                                          @"2048-original-gameplay/id848513715",
-                                          (long)self.score],
-               [UIImage imageNamed:@"tile16"]
+               str4,
+               recordImage
             ]
         applicationActivities:nil];
     [self presentViewController:self.activityViewController
@@ -264,7 +307,5 @@ NSString* const kShareButtonVertical = @"V:[shareButton]-0-[_pageControl]";
     [self dismissViewControllerAnimated:YES
                              completion:nil];
 }
-
-
 
 @end

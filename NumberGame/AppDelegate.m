@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GameCenterManager.h"
+#import "CJPAdController.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,15 @@
 {
      [[GameCenterManager sharedManager] setupManager];
     // Override point for customization after application launch.
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UINavigationController *navController = (UINavigationController*)[storyboard instantiateInitialViewController];
+    
+    // init CJPAdController with the nav controller
+    _adController = [[CJPAdController sharedManager] initWithContentViewController:navController];
+    // set the ad controller as the root view controller
+    self.window.rootViewController = _adController;
+
     return YES;
 }
 							

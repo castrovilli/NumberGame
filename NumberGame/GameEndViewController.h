@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GameBoardView;
 
 @protocol GameEndDelegate <NSObject>
 
@@ -20,5 +21,7 @@
 
 @property (nonatomic, assign) BOOL didWin;
 @property (nonatomic, assign) NSInteger score;
+@property (nonatomic, strong) UIView* shareView;
+@property (nonatomic, strong) UIView* recordView;
 
 @end

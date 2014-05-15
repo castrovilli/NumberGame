@@ -78,13 +78,13 @@ extern BOOL shouldPlaySound;
 
     self.soundButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                                        size:23];
-    self.soundButton.backgroundColor = [UIColor colorWithRed:136.0f / 255
-                                                       green:173.0f / 255
-                                                        blue:182.0f / 255
-                                                       alpha:1.0f];
+    [self.soundButton setBackgroundColor:[UIColor colorWithRed:136.0f / 255
+                                                         green:173.0f / 255
+                                                          blue:182.0f / 255
+                                                         alpha:1.0f]];
     self.soundButton.layer.cornerRadius = 5.0f;
     self.soundButton.tintColor = [UIColor whiteColor];
-    NSString* buttonTitle = shouldPlaySound ? @"Sound On" : @"Sound Off";
+    NSString* buttonTitle = shouldPlaySound ? NSLocalizedString(@"Sound On", @"声音开启") : NSLocalizedString(@"Sound Off",@"声音关闭");
     [self.soundButton setTitle:buttonTitle
                       forState:UIControlStateNormal];
 }
@@ -123,7 +123,7 @@ extern BOOL shouldPlaySound;
 {
 
     shouldPlaySound = !shouldPlaySound;
-    NSString* buttonTitle = shouldPlaySound ? @"Sound On" : @"Sound Off";
+        NSString* buttonTitle = shouldPlaySound ? NSLocalizedString(@"Sound On", @"声音开启") : NSLocalizedString(@"Sound Off",@"声音关闭");
     [self.soundButton setTitle:buttonTitle
                       forState:UIControlStateNormal];
 }

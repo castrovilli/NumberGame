@@ -50,7 +50,6 @@ typedef enum {
 
 - (BOOL)userHasLost;
 - (BOOL)userHasWon;
-- (NSUInteger)currentBiggestNumber;
 
 #pragma mark - Test
 

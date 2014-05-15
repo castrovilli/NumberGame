@@ -25,15 +25,22 @@ BOOL shouldPlaySound = YES;
     SystemSoundID winSound;
 }
 
+@property (weak, nonatomic) IBOutlet UIView* shareView;
+
 @property (weak, nonatomic) IBOutlet UIView* gameBoardBackgroundView;
 @property (nonatomic, strong) GameBoardView* gameboard;
 @property (nonatomic, strong) GameModel* model;
 
+
 @property (nonatomic, assign) NSInteger score;
-@property (nonatomic, strong) NSMutableArray* bestScoreRecord;
+
+@property (nonatomic, assign) NSInteger winValue;
 
 @property (weak, nonatomic) IBOutlet UIButton* currentScore;
 @property (weak, nonatomic) IBOutlet UIButton* bestScore;
+@property (nonatomic, strong)NSMutableArray* bestScoreRecord;
+
+@property (weak, nonatomic) IBOutlet UIView *recordView;
 
 @property (weak, nonatomic) IBOutlet UILabel* nextGoalScore;
 @property (weak, nonatomic) IBOutlet UIButton* appName;
@@ -61,12 +68,14 @@ BOOL shouldPlaySound = YES;
                                                         size:16];
     self.currentScore.layer.cornerRadius = 37.5f;
     self.currentScore.titleLabel.textColor = [UIColor whiteColor];
-    //    self.currentScore.titleLabel.numberOfLines = 2;
+       self.currentScore.titleLabel.numberOfLines = 2;
     self.currentScore.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                         green:173.0f / 255
                                                          blue:182.0f / 255
+                                         
                                                         alpha:1.0];
 
+    [self.currentScore.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self _setScore:0];
 
     self.appName.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
@@ -86,7 +95,10 @@ BOOL shouldPlaySound = YES;
                                                      green:173.0f / 255
                                                       blue:182.0f / 255
                                                      alpha:1.0];
-    //    self.bestScore.titleLabel.numberOfLines = 2;
+    self.bestScore.titleLabel.numberOfLines = 2;
+    self.bestScore.contentMode = UIViewContentModeScaleToFill;
+    [self.bestScore.titleLabel setTextAlignment:NSTextAlignmentCenter];
+
     self.nextGoalScore.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                               size:13];
     self.nextGoalScore.textColor = [UIColor colorWithRed:136.0f / 255
@@ -140,6 +152,8 @@ BOOL shouldPlaySound = YES;
     gameEndVC.delegate = self;
     gameEndVC.score = self.score;
     gameEndVC.didWin = didWin;
+    gameEndVC.shareView = self.shareView;
+    gameEndVC.recordView = self.recordView;
 
     [self presentViewController:gameEndVC
                        animated:YES
@@ -150,33 +164,38 @@ BOOL shouldPlaySound = YES;
 {
 
     self.score = score;
-    [self.currentScore setTitle:[NSString stringWithFormat:@"%li\nScore", (long)score]
+    NSString *str = NSLocalizedString(@"Score", @"得分");
+    [self.currentScore setTitle:[NSString stringWithFormat:@"%li\n%@",(long)score,str]
                        forState:UIControlStateNormal];
-    [self.currentScore setTitleColor:[UIColor whiteColor]
-                            forState:UIControlStateNormal];
+//    [self.currentScore setTitleColor:[UIColor whiteColor]
+//                            forState:UIControlStateNormal];
 
     if (![[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"]) {
 
         [[NSUserDefaults standardUserDefaults] setInteger:self.score
                                                    forKey:@"highscore"];
 
+
         [[NSUserDefaults standardUserDefaults] synchronize];
 
     } else {
 
         NSInteger pastScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
+       
 
         if (self.score > pastScore) {
 
             [[NSUserDefaults standardUserDefaults] setInteger:self.score
                                                        forKey:@"highscore"];
+            
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self _reportScoreToGameCenter]; // ADD THIS LINE
         }
     }
 
     NSInteger bestScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
-    [self.bestScore setTitle:[NSString stringWithFormat:@"%li\nBest", (long)bestScore]
+    NSString *str1 = NSLocalizedString(@"Best", @"最高分");
+    [self.bestScore setTitle:[NSString stringWithFormat:@"%li\n%@", (long)bestScore,str1]
                     forState:UIControlStateNormal];
     [self.bestScore setTitleColor:[UIColor whiteColor]
                          forState:UIControlStateNormal];
@@ -257,13 +276,14 @@ BOOL shouldPlaySound = YES;
 
 - (void)followUp
 {
-    [self configNextGoalScore];
+    
     // This is the earliest point the user can win
 
     if ([self.model userHasWon]) {
-        [self saveBestScoreRecord];
         [self _showGameEndScreenWitnWin:YES];
         [self _playSound:winSound];
+        
+        [self configureWinValue:self.winValue];
     } else {
         NSInteger rand = arc4random_uniform(10);
         if (rand == 1) {
@@ -273,9 +293,9 @@ BOOL shouldPlaySound = YES;
         }
         // At this point, the user may lose
         if ([self.model userHasLost]) {
-            [self saveBestScoreRecord];
             [self _showGameEndScreenWitnWin:NO];
             [self _playSound:lostSound];
+//            [self saveBestScoreRecord];
         }
     }
 }
@@ -390,29 +410,32 @@ BOOL shouldPlaySound = YES;
                                                                    alpha:1.0f];
 
     self.gameboard = gameboard;
+    if (![self getWinValue]) {
+        self.winValue = 12;
+    } else {
+        self.winValue = [self getWinValue];
+    }
 
     GameModel* model = [GameModel gameModelWithDimension:4
-                                                winValue:12288
+                                                winValue:self.winValue
                                                 delegate:self];
 
     [model insertAtRandomLocationTileWithValue:3];
     [model insertAtRandomLocationTileWithValue:6];
     self.model = model;
+
+    [self configNextGoalScore];
 }
 
 - (void)configNextGoalScore
 {
+    NSString *str = NSLocalizedString(@"Your goal is to get the ", @"你的目标是得到");
+    NSString *str3 = NSLocalizedString(@" tile!", @" 数字块!");
+    NSString *str4 = [str stringByAppendingFormat:@"%ld",(long)self.winValue];
 
-    NSString* str1 = [NSString stringWithFormat:@"Your next goal is to get the %lu tile!", (unsigned long)[self.model currentBiggestNumber]];
+    NSString* str1 = [str4 stringByAppendingString: str3];
 
-    NSMutableAttributedString* str2 = [[NSMutableAttributedString alloc] initWithString:str1];
-    [str2 addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor colorWithRed:0.0f
-                                       green:204.0f / 255
-                                        blue:1.0f
-                                       alpha:1.0]
-                 range:NSMakeRange(29, 5)];
-    self.nextGoalScore.attributedText = str2;
+    self.nextGoalScore.text = str1;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
@@ -425,10 +448,11 @@ BOOL shouldPlaySound = YES;
     if ([segue.identifier isEqualToString:@"GameRecVC"]) {
         GameRecordViewController* gameRecord = (GameRecordViewController*)segue.destinationViewController;
 
-        self.bestScoreRecord = self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
+        self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
         NSLog(@"从缓存读取的数据啊%@", self.bestScoreRecord);
-
+     
         gameRecord.bestScoreRecord = self.bestScoreRecord;
+        
     }
 }
 
@@ -436,76 +460,18 @@ BOOL shouldPlaySound = YES;
  *  游戏结束时保存当前视图
  */
 
-- (void)saveBestScoreRecord
+
+
+- (NSInteger)getWinValue
 {
+   return [[NSUserDefaults standardUserDefaults] integerForKey:@"winvalue"];
+}
 
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]) {
-        self.bestScoreRecord = [[NSMutableArray alloc] init];
-    } else {
-        self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
-        NSLog(@"从缓存初始化数组");
-    }
-
-    NSInteger pastScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
-
-    if (self.score == pastScore) {
-
-        if ([self.bestScoreRecord count] < 3) {
-            [self.bestScoreRecord addObject:[NSNumber numberWithInteger:self.score]];
-            UIImage* gameBoardImage = [self.gameboard saveImageWithScale:1.0f];
-
-            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString* documentsDirectory = [paths lastObject];
-            NSString* filename = [NSString stringWithFormat:@"Photo-%d.jpg", self.score];
-            NSString* photoPath = [documentsDirectory stringByAppendingPathComponent:filename];
-            NSData* data = UIImagePNGRepresentation(gameBoardImage);
-            NSError* error;
-            if (![data writeToFile:photoPath
-                           options:NSDataWritingAtomic
-                             error:&error]) {
-                NSLog(@"Error writing file: %@", error);
-            }
-
-            [[NSUserDefaults standardUserDefaults] setObject:self.bestScoreRecord
-                                                      forKey:@"bestScoreRecord"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-
-        } else {
-
-            NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString* documentsDirectory = [paths lastObject];
-            NSString* filename = [NSString stringWithFormat:@"Photo-%d.jpg", [self.bestScoreRecord[0] integerValue]];
-            NSString* photoPath = [documentsDirectory stringByAppendingPathComponent:filename];
-
-            NSFileManager* fileManager = [NSFileManager defaultManager];
-            if ([fileManager fileExistsAtPath:photoPath]) {
-                NSError* error;
-                if (![fileManager removeItemAtPath:photoPath
-                                             error:&error]) {
-                    NSLog(@"Error removing file: %@", error);
-                }
-            }
-
-            [self.bestScoreRecord removeObjectAtIndex:0];
-
-            UIImage* gameBoardImage = [self.gameboard saveImageWithScale:1.0f];
-
-            NSString* filenameAdd = [NSString stringWithFormat:@"Photo-%d.jpg", self.score];
-            NSString* photoPathAdd = [documentsDirectory stringByAppendingPathComponent:filenameAdd];
-
-            NSData* data = UIImagePNGRepresentation(gameBoardImage);
-            NSError* error;
-            if (![data writeToFile:photoPathAdd
-                           options:NSDataWritingAtomic
-                             error:&error]) {
-                NSLog(@"Error writing file: %@", error);
-            }
-            [self.bestScoreRecord addObject:@(self.score)];
-            [[NSUserDefaults standardUserDefaults] setObject:self.bestScoreRecord
-                                                      forKey:@"bestScoreRecord"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-    }
+- (void)configureWinValue:(NSInteger)nextValue
+{
+    self.winValue = nextValue * 2;
+    [[NSUserDefaults standardUserDefaults] setInteger:self.winValue forKey:@"winvalue"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

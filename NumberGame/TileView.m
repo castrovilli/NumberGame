@@ -45,7 +45,7 @@
                                                                frame.size.height)];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                 size:22];
+                                 size:15];
     ;
     label.layer.cornerRadius = frame.size.width / 2.0f;
     label.clipsToBounds = YES;
