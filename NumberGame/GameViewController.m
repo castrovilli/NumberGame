@@ -128,6 +128,16 @@ BOOL shouldPlaySound = YES;
     AudioServicesCreateSystemSoundID(CFBridgingRetain(soundURL4), &winSound);
 
     [[GameCenterManager sharedManager] setDelegate:self];
+    
+    
+    if ([AppHelper isPhone]) {
+        if (self.view.frame.size.height == 480) {
+            self.currentScore.frame = CGRectMake(20, 10, 75, 75);
+            self.appName.frame = CGRectMake(120, 5, 80, 80);
+            self.bestScore.frame = CGRectMake(235, 10, 75, 75);
+            self.nextGoalScore.frame = CGRectMake(20, 90, 280, 20);
+            self.recordView.frame = CGRectMake(10, 114, 300, 366);
+        }}
 }
 
 #pragma mark — IBActions
