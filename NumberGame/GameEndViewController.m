@@ -43,7 +43,7 @@
                                                blue:182.0f / 255
                                               alpha:1.0f];
     self.winLabel.text = self.didWin ? NSLocalizedString(@"You win!", @"您赢了!") : NSLocalizedString(@"You lose!", @"挑战失败!");
-    self.winLabel.layer.cornerRadius = 20.0f;
+    self.winLabel.layer.cornerRadius = 5.0f;
 
     self.scoreLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                            size:23];
@@ -62,7 +62,7 @@
                                                         blue:1.0f
                                                        alpha:1.0];
     self.shareButton.titleLabel.textColor = [UIColor whiteColor];
-    self.shareButton.layer.cornerRadius = 20.0f;
+    self.shareButton.layer.cornerRadius = 5.0f;
 
     self.replayButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                                         size:23];
@@ -71,7 +71,7 @@
                                                          blue:182.0f / 255
                                                         alpha:1.0f];
     self.replayButton.titleLabel.textColor = [UIColor whiteColor];
-    self.replayButton.layer.cornerRadius = 20.0f;
+    self.replayButton.layer.cornerRadius = 5.0f;
     
 }
 

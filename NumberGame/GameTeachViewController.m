@@ -33,7 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.playButton.layer.cornerRadius = 20.0f;
+    self.playButton.layer.cornerRadius = 5.0f;
     self.playButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                                         size:23];
     

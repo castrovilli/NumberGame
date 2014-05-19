@@ -32,16 +32,15 @@ BOOL shouldPlaySound = YES;
 @property (nonatomic, strong) GameBoardView* gameboard;
 @property (nonatomic, strong) GameModel* model;
 
-
 @property (nonatomic, assign) NSInteger score;
 
 @property (nonatomic, assign) NSInteger winValue;
 
 @property (weak, nonatomic) IBOutlet UIButton* currentScore;
 @property (weak, nonatomic) IBOutlet UIButton* bestScore;
-@property (nonatomic, strong)NSMutableArray* bestScoreRecord;
+@property (nonatomic, strong) NSMutableArray* bestScoreRecord;
 
-@property (weak, nonatomic) IBOutlet UIView *recordView;
+@property (weak, nonatomic) IBOutlet UIView* recordView;
 
 @property (weak, nonatomic) IBOutlet UILabel* nextGoalScore;
 @property (weak, nonatomic) IBOutlet UIButton* appName;
@@ -65,21 +64,26 @@ BOOL shouldPlaySound = YES;
 
     [self _setupGestureRecognizers];
 
-    self.currentScore.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:13] : [UIFont fontWithName:@"AvenirNext-Heavy" size:23];
+    self.currentScore.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                              size:13]
+                                                            : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                              size:23];
     self.currentScore.layer.cornerRadius = [AppHelper isPhone] ? 37.5f : 60.0f;
-    
+
     self.currentScore.titleLabel.textColor = [UIColor whiteColor];
-       self.currentScore.titleLabel.numberOfLines = 2;
+    self.currentScore.titleLabel.numberOfLines = 2;
     self.currentScore.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                         green:173.0f / 255
                                                          blue:182.0f / 255
-                                         
                                                         alpha:1.0];
 
     [self.currentScore.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self _setScore:0];
 
-    self.appName.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:23] : [UIFont fontWithName:@"AvenirNext-Heavy" size:27];
+    self.appName.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                         size:23]
+                                                       : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                         size:27];
 
     self.appName.layer.cornerRadius = [AppHelper isPhone] ? 40.0f : 65.0f;
     self.appName.backgroundColor = [UIColor colorWithRed:93.0f / 255
@@ -88,7 +92,10 @@ BOOL shouldPlaySound = YES;
                                                    alpha:1.0f];
     self.appName.tintColor = [UIColor whiteColor];
 
-    self.bestScore.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:13] : [UIFont fontWithName:@"AvenirNext-Heavy" size:23];
+    self.bestScore.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                           size:13]
+                                                         : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                           size:23];
     self.bestScore.layer.cornerRadius = [AppHelper isPhone] ? 37.5f : 60.0f;
 
     self.bestScore.backgroundColor = [UIColor colorWithRed:136.0f / 255
@@ -99,7 +106,10 @@ BOOL shouldPlaySound = YES;
     self.bestScore.contentMode = UIViewContentModeScaleToFill;
     [self.bestScore.titleLabel setTextAlignment:NSTextAlignmentCenter];
 
-    self.nextGoalScore.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy" size:13] : [UIFont fontWithName:@"AvenirNext-Heavy" size:25];
+    self.nextGoalScore.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                    size:13]
+                                                  : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                    size:25];
 
     self.nextGoalScore.textColor = [UIColor colorWithRed:136.0f / 255
                                                    green:173.0f / 255
@@ -128,8 +138,7 @@ BOOL shouldPlaySound = YES;
     AudioServicesCreateSystemSoundID(CFBridgingRetain(soundURL4), &winSound);
 
     [[GameCenterManager sharedManager] setDelegate:self];
-    
-    
+
     if ([AppHelper isPhone]) {
         if (self.view.frame.size.height == 480) {
             self.currentScore.frame = CGRectMake(20, 10, 75, 75);
@@ -137,7 +146,8 @@ BOOL shouldPlaySound = YES;
             self.bestScore.frame = CGRectMake(235, 10, 75, 75);
             self.nextGoalScore.frame = CGRectMake(20, 90, 280, 20);
             self.recordView.frame = CGRectMake(10, 114, 300, 366);
-        }}
+        }
+    }
 }
 
 #pragma mark — IBActions
@@ -174,8 +184,8 @@ BOOL shouldPlaySound = YES;
 {
 
     self.score = score;
-    NSString *str = NSLocalizedString(@"Score", @"得分");
-    [self.currentScore setTitle:[NSString stringWithFormat:@"%li\n%@",(long)score,str]
+    NSString* str = NSLocalizedString(@"Score", @"得分");
+    [self.currentScore setTitle:[NSString stringWithFormat:@"%li\n%@", (long)score, str]
                        forState:UIControlStateNormal];
 
     if (![[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"]) {
@@ -183,27 +193,25 @@ BOOL shouldPlaySound = YES;
         [[NSUserDefaults standardUserDefaults] setInteger:self.score
                                                    forKey:@"highscore"];
 
-
         [[NSUserDefaults standardUserDefaults] synchronize];
 
     } else {
 
         NSInteger pastScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
-       
 
         if (self.score > pastScore) {
 
             [[NSUserDefaults standardUserDefaults] setInteger:self.score
                                                        forKey:@"highscore"];
-            
+
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self _reportScoreToGameCenter]; // ADD THIS LINE
         }
     }
 
     NSInteger bestScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
-    NSString *str1 = NSLocalizedString(@"Best", @"最高分");
-    [self.bestScore setTitle:[NSString stringWithFormat:@"%li\n%@", (long)bestScore,str1]
+    NSString* str1 = NSLocalizedString(@"Best", @"最高分");
+    [self.bestScore setTitle:[NSString stringWithFormat:@"%li\n%@", (long)bestScore, str1]
                     forState:UIControlStateNormal];
     [self.bestScore setTitleColor:[UIColor whiteColor]
                          forState:UIControlStateNormal];
@@ -284,13 +292,13 @@ BOOL shouldPlaySound = YES;
 
 - (void)followUp
 {
-    
+
     // This is the earliest point the user can win
 
     if ([self.model userHasWon]) {
         [self _showGameEndScreenWitnWin:YES];
         [self _playSound:winSound];
-        
+
         [self configureWinValue:self.winValue];
     } else {
         NSInteger rand = arc4random_uniform(10);
@@ -303,7 +311,7 @@ BOOL shouldPlaySound = YES;
         if ([self.model userHasLost]) {
             [self _showGameEndScreenWitnWin:NO];
             [self _playSound:lostSound];
-//            [self saveBestScoreRecord];
+            //            [self saveBestScoreRecord];
         }
     }
 }
@@ -411,7 +419,7 @@ BOOL shouldPlaySound = YES;
     gameboard.layer.cornerRadius = 50.0;
     [self.gameBoardBackgroundView addSubview:gameboard];
     if (![AppHelper isPhone]) {
-            gameboard.center = CGPointMake(self.gameBoardBackgroundView.center.x, self.gameBoardBackgroundView.center.y - gameboard.frame.size.height/2);
+        gameboard.center = CGPointMake(self.gameBoardBackgroundView.center.x, self.gameBoardBackgroundView.center.y - gameboard.frame.size.height / 2);
     }
 
     self.gameBoardBackgroundView.backgroundColor = [UIColor colorWithRed:232.0f / 255
@@ -439,11 +447,11 @@ BOOL shouldPlaySound = YES;
 
 - (void)configNextGoalScore
 {
-    NSString *str = NSLocalizedString(@"Your goal is to get the ", @"你的目标是得到");
-    NSString *str3 = NSLocalizedString(@" tile!", @" 数字块!");
-    NSString *str4 = [str stringByAppendingFormat:@"%ld",(long)self.winValue];
+    NSString* str = NSLocalizedString(@"Your goal is to get the ", @"你的目标是得到");
+    NSString* str3 = NSLocalizedString(@" tile!", @" 数字块!");
+    NSString* str4 = [str stringByAppendingFormat:@"%ld", (long)self.winValue];
 
-    NSString* str1 = [str4 stringByAppendingString: str3];
+    NSString* str1 = [str4 stringByAppendingString:str3];
 
     self.nextGoalScore.text = str1;
 }
@@ -460,9 +468,8 @@ BOOL shouldPlaySound = YES;
 
         self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
         NSLog(@"从缓存读取的数据啊%@", self.bestScoreRecord);
-     
+
         gameRecord.bestScoreRecord = self.bestScoreRecord;
-        
     }
 }
 
@@ -470,17 +477,16 @@ BOOL shouldPlaySound = YES;
  *  游戏结束时保存当前视图
  */
 
-
-
 - (NSInteger)getWinValue
 {
-   return [[NSUserDefaults standardUserDefaults] integerForKey:@"winvalue"];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"winvalue"];
 }
 
 - (void)configureWinValue:(NSInteger)nextValue
 {
     self.winValue = nextValue * 2;
-    [[NSUserDefaults standardUserDefaults] setInteger:self.winValue forKey:@"winvalue"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.winValue
+                                               forKey:@"winvalue"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

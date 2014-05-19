@@ -74,11 +74,15 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
             [documentsDirectory stringByAppendingPathComponent:filename];
 
         UIImage* recordImage = [UIImage imageWithContentsOfFile:photoPath];
+        NSLog(@"图片高度为:%f",recordImage.size.height);
 
         UIImageView* gamaBoardView =
             [[UIImageView alloc] initWithImage:recordImage];
-        gamaBoardView.center = self.scrollView.center;
-        [gameBoardBackgroundView addSubview:gamaBoardView];
+        [gamaBoardView sizeToFit];
+        NSLog(@"gamaBoardView 的高为:%f",gamaBoardView.frame.size.height);
+        
+//        gamaBoardView.center = self.scrollView.center;
+        
 
         UILabel* scoreLabel =
             [[UILabel alloc] init];
@@ -102,12 +106,10 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
         scoreLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
                                           size:16];
 
-        [gameBoardBackgroundView addSubview:scoreLabel];
 
         UIButton* shareButton =
             [[UIButton alloc] init];
-        shareButton.translatesAutoresizingMaskIntoConstraints = NO;
-        shareButton.layer.cornerRadius = 20.0f;
+        shareButton.layer.cornerRadius = 5.0f;
         shareButton.titleLabel.font =
             [UIFont fontWithName:@"AvenirNext-Heavy"
                             size:23];
@@ -120,11 +122,25 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
         shareButton.titleLabel.textColor = [UIColor whiteColor];
         [shareButton setTitle:NSLocalizedString(@"SHARE", @"分享")
                      forState:UIControlStateNormal];
-        shareButton.layer.cornerRadius = 20.0f;
+        shareButton.layer.cornerRadius = 5.0f;
         [shareButton addTarget:self
                         action:@selector(openShare)
               forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([AppHelper isPhone]) {
+            if (self.view.frame.size.height == 480) {
+                scoreLabel.frame = scoreLabel.frame = CGRectMake(120, 5, 80, 80);
+                gamaBoardView.frame = CGRectMake(10, 95, 300, 316);
+                shareButton.frame = CGRectMake(50, 410, 220, 40);
+            } else {
+                scoreLabel.frame = scoreLabel.frame = CGRectMake(120, 20, 80, 80);
+                gamaBoardView.frame = CGRectMake(10, 135, 300, 316);
+                shareButton.frame = CGRectMake(50, 480, 220, 40);
+            }
+        }
+        [gameBoardBackgroundView addSubview:scoreLabel];
         [gameBoardBackgroundView addSubview:shareButton];
+        [gameBoardBackgroundView addSubview:gamaBoardView];
 
         gameBoardBackgroundView.backgroundColor = [UIColor colorWithRed:232.0f / 255
                                                                   green:251.0f / 255
@@ -132,20 +148,14 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
                                                                   alpha:1.0f];
 
         [self.scrollView addSubview:gameBoardBackgroundView];
+        NSLog(@"%f",shareButton.frame.size.height);
+        NSLog(@"%f",shareButton.frame.size.width);
 
-        NSDictionary* viewsDictionary = NSDictionaryOfVariableBindings(shareButton, _pageControl);
+        NSLog(@"%f",shareButton.frame.origin.x);
 
-        NSMutableArray* constraints = [[NSMutableArray alloc] init];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:kShareButtonHorizontal
-                                                                                 options:0
-                                                                                 metrics:nil
-                                                                                   views:viewsDictionary]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:kShareButtonVertical
-                                                                                 options:0
-                                                                                 metrics:nil
-                                                                                   views:viewsDictionary]];
+        NSLog(@"%f",shareButton.frame.origin.y);
 
-        [self.view addConstraints:constraints];
+        
     }
 
     CGRect gameBoardBackgroundViewRect = CGRectMake([self.bestScoreRecord count] * self.scrollView.bounds.size.width,
@@ -191,7 +201,7 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
                                                 alpha:1.0f];
     tipsLabel.text = tips;
     tipsLabel.center = self.scrollView.center;
-    [gameBoardBackgroundView addSubview:tipsLabel];
+
 
     UIButton* continueButton =
         [[UIButton alloc] init];
@@ -209,35 +219,30 @@ NSString* const kContinueButtonVertical = @"V:[continueButton]-0-[_pageControl]"
     continueButton.titleLabel.textColor = [UIColor whiteColor];
     [continueButton setTitle:NSLocalizedString(@"KEEP GOING", @"继续")
                    forState:UIControlStateNormal];
-    continueButton.layer.cornerRadius = 20.0f;
+    continueButton.layer.cornerRadius = 5.0f;
     [continueButton addTarget:self
                       action:@selector(continueGame)
             forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([AppHelper isPhone]) {
+        if (self.view.frame.size.height == 480) {
+//            scoreLabel.frame = scoreLabel.frame = CGRectMake(120, 5, 80, 80);
+//            gamaBoardView.frame = CGRectMake(10, 95, 300, 316);
+            continueButton.frame = CGRectMake(50, 410, 220, 40);
+        } else {
+            continueButton.frame = CGRectMake(50, 480, 220, 40);
+        }
+    }
+    
+    [gameBoardBackgroundView addSubview:tipsLabel];
 
     [gameBoardBackgroundView addSubview:continueButton];
 
     [self.scrollView addSubview:gameBoardBackgroundView];
 
-    NSDictionary* viewsDictionary2 = NSDictionaryOfVariableBindings(continueButton, _pageControl);
-
-    NSMutableArray* constraints2 = [[NSMutableArray alloc] init];
-    [constraints2 addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:kContinueButtonVertical
-                                                                              options:0
-                                                                              metrics:nil
-                                                                                views:viewsDictionary2]];
-    [constraints2 addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:kContinueButtonHorizontal
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:viewsDictionary2]];
-
-    [self.view addConstraints:constraints2];
+   
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (BOOL)prefersStatusBarHidden
 {
