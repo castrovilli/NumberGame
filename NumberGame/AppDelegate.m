@@ -20,7 +20,7 @@
     
     NSString *storyboardName = [AppHelper isPhone] ? @"Main_iPhone" : @"Main_iPad";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-    UINavigationController *navController = (UINavigationController*)[storyboard instantiateInitialViewController];
+    UIViewController *navController = (UIViewController*)[storyboard instantiateInitialViewController];
     
     // init CJPAdController with the nav controller
     _adController = [[CJPAdController sharedManager] initWithContentViewController:navController];

@@ -7,6 +7,7 @@
 //
 
 #import "GameSetUpViewController.h"
+#import "AppHelper.h"
 extern BOOL shouldPlaySound;
 
 @interface GameSetUpViewController ()
@@ -32,16 +33,18 @@ extern BOOL shouldPlaySound;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                           size:23];
+    self.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                 size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                            size:30];
     self.titleLabel.textColor = [UIColor colorWithRed:136.0f / 255
                                                 green:173.0f / 255
                                                  blue:182.0f / 255
                                                 alpha:1.0f];
     self.titleLabel.layer.cornerRadius = 5.0f;
 
-    self.continueButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                          size:23];
+    self.continueButton.titleLabel.font =     self.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                           size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                                                      size:30];
     self.continueButton.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                           green:173.0f / 255
                                                            blue:182.0f / 255
@@ -49,8 +52,9 @@ extern BOOL shouldPlaySound;
     self.continueButton.tintColor = [UIColor whiteColor];
     self.continueButton.layer.cornerRadius = 5.0f;
 
-    self.replayButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                        size:23];
+    self.replayButton.titleLabel.font =     self.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                         size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                                                    size:30];;
     self.replayButton.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                         green:173.0f / 255
                                                          blue:182.0f / 255
@@ -58,8 +62,9 @@ extern BOOL shouldPlaySound;
     self.replayButton.tintColor = [UIColor whiteColor];
     self.replayButton.layer.cornerRadius = 5.0f;
 
-    self.rateButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                      size:23];
+    self.rateButton.titleLabel.font =     self.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                       size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                                                  size:30];;
     self.rateButton.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                       green:173.0f / 255
                                                        blue:182.0f / 255
@@ -67,8 +72,9 @@ extern BOOL shouldPlaySound;
     self.rateButton.tintColor = [UIColor whiteColor];
     self.rateButton.layer.cornerRadius = 5.0f;
 
-    self.tutorialButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                          size:23];
+    self.tutorialButton.titleLabel.font =     self.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                           size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                                                      size:30];;
     self.tutorialButton.backgroundColor = [UIColor colorWithRed:136.0f / 255
                                                           green:173.0f / 255
                                                            blue:182.0f / 255
@@ -76,8 +82,9 @@ extern BOOL shouldPlaySound;
     self.tutorialButton.tintColor = [UIColor whiteColor];
     self.tutorialButton.layer.cornerRadius = 5.0f;
 
-    self.soundButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                                       size:23];
+    self.soundButton.titleLabel.font =     self.titleLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                        size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                                                                   size:30];;
     [self.soundButton setBackgroundColor:[UIColor colorWithRed:136.0f / 255
                                                          green:173.0f / 255
                                                           blue:182.0f / 255

@@ -15,11 +15,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" id="Q7M-06-Pmn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="7vz-jR-LMo">
                                         <rect key="frame" x="10" y="156" width="300" height="316"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bub-0Y-kvl">
@@ -72,7 +72,6 @@
                         <outlet property="currentScore" destination="ZhJ-aP-0Qy" id="Mu8-zL-V0f"/>
                         <outlet property="gameBoardBackgroundView" destination="7vz-jR-LMo" id="IIq-UU-bPU"/>
                         <outlet property="nextGoalScore" destination="bub-0Y-kvl" id="KZQ-Fo-k8t"/>
-                        <outlet property="recordView" destination="7vz-jR-LMo" id="YGO-gv-RW8"/>
                         <outlet property="shareView" destination="Q7M-06-Pmn" id="ZQh-q4-5lk"/>
                         <segue destination="EsS-Fr-5lQ" kind="modal" identifier="GameEndSegue" id="Kcz-di-Rlc"/>
                     </connections>

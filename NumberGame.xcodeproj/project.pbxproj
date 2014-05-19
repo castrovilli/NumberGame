@@ -20,6 +20,7 @@
 		E8294A341923969800C80D62 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8294A331923969800C80D62 /* MessageUI.framework */; };
 		E833501519238373002B1257 /* GameTeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E833501419238373002B1257 /* GameTeachViewController.m */; };
 		E833501919238B87002B1257 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E833501719238B87002B1257 /* Localizable.strings */; };
+		E84B2D161929F2A4007FED30 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E84B2D151929F2A4007FED30 /* StoreKit.framework */; };
 		E8565E601915DDDD008F1271 /* GameRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8565E5F1915DDDD008F1271 /* GameRecordViewController.m */; };
 		E8565E6419161359008F1271 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8565E6319161359008F1271 /* GameKit.framework */; };
 		E8565E6619161364008F1271 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8565E6519161364008F1271 /* SystemConfiguration.framework */; };
@@ -58,7 +59,6 @@
 		E8EC9C8E1919D512005385FC /* new_tile.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8EC9C891919D512005385FC /* new_tile.mp3 */; };
 		E8EC9C8F1919D512005385FC /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8EC9C8A1919D512005385FC /* win.mp3 */; };
 		E8EC9C901919D512005385FC /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E8EC9C8A1919D512005385FC /* win.mp3 */; };
-		E8EC9C931919F2C4005385FC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC9C921919F2C4005385FC /* StoreKit.framework */; };
 		E8F0439E1910972F009DC378 /* GameEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F0439D1910972F009DC378 /* GameEndViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +101,7 @@
 		E83350161923892A002B1257 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
 		E833501819238B87002B1257 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E833501A19238BA6002B1257 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E84B2D151929F2A4007FED30 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E8565E5E1915DDDD008F1271 /* GameRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRecordViewController.h; sourceTree = "<group>"; };
 		E8565E5F1915DDDD008F1271 /* GameRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameRecordViewController.m; sourceTree = "<group>"; };
 		E8565E6319161359008F1271 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -145,7 +146,6 @@
 		E8EC9C881919D512005385FC /* attach.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attach.mp3; sourceTree = "<group>"; };
 		E8EC9C891919D512005385FC /* new_tile.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = new_tile.mp3; sourceTree = "<group>"; };
 		E8EC9C8A1919D512005385FC /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
-		E8EC9C921919F2C4005385FC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E8F0439C1910972F009DC378 /* GameEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEndViewController.h; sourceTree = "<group>"; };
 		E8F0439D1910972F009DC378 /* GameEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEndViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,13 +155,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E84B2D161929F2A4007FED30 /* StoreKit.framework in Frameworks */,
 				E8294A341923969800C80D62 /* MessageUI.framework in Frameworks */,
 				E8294A321923967500C80D62 /* CoreTelephony.framework in Frameworks */,
 				E8294A301923965600C80D62 /* AVFoundation.framework in Frameworks */,
 				E8294A2E1923963500C80D62 /* iAd.framework in Frameworks */,
 				E8294A2C1923962D00C80D62 /* AdSupport.framework in Frameworks */,
 				E8E61C04191A36EF00BF1DD4 /* QuartzCore.framework in Frameworks */,
-				E8EC9C931919F2C4005385FC /* StoreKit.framework in Frameworks */,
 				E8294A291923946600C80D62 /* libGoogleAdMobAds.a in Frameworks */,
 				E8565E68191613EB008F1271 /* Security.framework in Frameworks */,
 				E8565E6619161364008F1271 /* SystemConfiguration.framework in Frameworks */,
@@ -265,13 +265,13 @@
 		E85CD541190A3C69000F7447 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E84B2D151929F2A4007FED30 /* StoreKit.framework */,
 				E8294A331923969800C80D62 /* MessageUI.framework */,
 				E8294A311923967500C80D62 /* CoreTelephony.framework */,
 				E8294A2F1923965600C80D62 /* AVFoundation.framework */,
 				E8294A2D1923963400C80D62 /* iAd.framework */,
 				E8294A2B1923962D00C80D62 /* AdSupport.framework */,
 				E8E61C03191A36EF00BF1DD4 /* QuartzCore.framework */,
-				E8EC9C921919F2C4005385FC /* StoreKit.framework */,
 				E8565E67191613EB008F1271 /* Security.framework */,
 				E8565E6519161364008F1271 /* SystemConfiguration.framework */,
 				E8565E6319161359008F1271 /* GameKit.framework */,
@@ -434,6 +434,11 @@
 				TargetAttributes = {
 					E85CD53E190A3C69000F7447 = {
 						DevelopmentTeam = C3XL98LRX8;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					E85CD562190A3C69000F7447 = {
 						TestTargetID = E85CD53E190A3C69000F7447;
@@ -619,6 +624,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "444C1586-EFA6-42AE-92AF-A7E68E4B3DFD";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -653,6 +659,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "444C1586-EFA6-42AE-92AF-A7E68E4B3DFD";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -665,6 +672,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NumberGame/NumberGame-Prefix.pch";
 				INFOPLIST_FILE = "NumberGame/NumberGame-Info.plist";
@@ -675,6 +684,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -685,6 +695,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NumberGame/NumberGame-Prefix.pch";
 				INFOPLIST_FILE = "NumberGame/NumberGame-Info.plist";
@@ -695,6 +707,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

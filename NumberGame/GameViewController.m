@@ -40,7 +40,6 @@ BOOL shouldPlaySound = YES;
 @property (weak, nonatomic) IBOutlet UIButton* bestScore;
 @property (nonatomic, strong) NSMutableArray* bestScoreRecord;
 
-@property (weak, nonatomic) IBOutlet UIView* recordView;
 
 @property (weak, nonatomic) IBOutlet UILabel* nextGoalScore;
 @property (weak, nonatomic) IBOutlet UIButton* appName;
@@ -145,7 +144,7 @@ BOOL shouldPlaySound = YES;
             self.appName.frame = CGRectMake(120, 5, 80, 80);
             self.bestScore.frame = CGRectMake(235, 10, 75, 75);
             self.nextGoalScore.frame = CGRectMake(20, 90, 280, 20);
-            self.recordView.frame = CGRectMake(10, 114, 300, 366);
+            self.gameBoardBackgroundView.frame = CGRectMake(10, 114, 300, 316);
         }
     }
 }
@@ -157,7 +156,6 @@ BOOL shouldPlaySound = YES;
     if ([[GameCenterManager sharedManager] checkGameCenterAvailability]) {
         [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:self];
     }
-    NSLog(@"点击排行榜");
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -173,7 +171,7 @@ BOOL shouldPlaySound = YES;
     gameEndVC.score = self.score;
     gameEndVC.didWin = didWin;
     gameEndVC.shareView = self.shareView;
-    gameEndVC.recordView = self.recordView;
+    gameEndVC.recordView = self.gameBoardBackgroundView;
 
     [self presentViewController:gameEndVC
                        animated:YES
@@ -215,8 +213,6 @@ BOOL shouldPlaySound = YES;
                     forState:UIControlStateNormal];
     [self.bestScore setTitleColor:[UIColor whiteColor]
                          forState:UIControlStateNormal];
-
-    NSLog(@"现在的分数是%@", self.currentScore.titleLabel.text);
 }
 
 - (void)_reportScoreToGameCenter
@@ -373,27 +369,26 @@ BOOL shouldPlaySound = YES;
     [self presentViewController:gameCenterLoginController
                        animated:YES
                      completion:^{
-                         NSLog(@"Finished Presenting Authentication Controller");
                      }];
 }
 
 - (void)gameCenterManager:(GameCenterManager*)manager reportedScore:(GKScore*)score withError:(NSError*)error
 {
     if (!error) {
-        NSLog(@"GCM Reported Score: %@", score);
+        
     } else {
-        NSLog(@"GCM Error while reporting score: %@", error);
+        
     }
 }
 
 - (void)gameCenterManager:(GameCenterManager*)manager didSaveScore:(GKScore*)score2
 {
-    NSLog(@"Saved GCM Score with value: %lld", score2.value);
+   
 }
 
 - (void)gameCenterManager:(GameCenterManager*)manager error:(NSError*)error
 {
-    NSLog(@"GCM Error: %@", error);
+   
 }
 
 #pragma mark — Private Methods
@@ -429,7 +424,7 @@ BOOL shouldPlaySound = YES;
 
     self.gameboard = gameboard;
     if (![self getWinValue]) {
-        self.winValue = 12;
+        self.winValue = 1536;
     } else {
         self.winValue = [self getWinValue];
     }
@@ -467,7 +462,6 @@ BOOL shouldPlaySound = YES;
         GameRecordViewController* gameRecord = (GameRecordViewController*)segue.destinationViewController;
 
         self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
-        NSLog(@"从缓存读取的数据啊%@", self.bestScoreRecord);
 
         gameRecord.bestScoreRecord = self.bestScoreRecord;
     }

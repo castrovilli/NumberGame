@@ -9,6 +9,7 @@
 #import "GameEndViewController.h"
 #import "UIView+saveImageWithScale.h"
 #import "GameBoardView.h"
+#import "AppHelper.h"
 
 @interface GameEndViewController () <UIActionSheetDelegate>
 
@@ -36,8 +37,9 @@
                                                    blue:1.0f
                                                   alpha:1.0f]];
 
-    self.winLabel.font = [UIFont fontWithName:@"AvenirNext-Heavy"
-                                         size:23];
+    self.winLabel.font = [AppHelper isPhone] ? [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                               size:23] : [UIFont fontWithName:@"AvenirNext-Heavy"
+                                                                                          size:30];
     self.winLabel.textColor = [UIColor colorWithRed:136.0f / 255
                                               green:173.0f / 255
                                                blue:182.0f / 255
@@ -116,7 +118,6 @@
         self.bestScoreRecord = [[NSMutableArray alloc] init];
     } else {
         self.bestScoreRecord = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"bestScoreRecord"]];
-        NSLog(@"从缓存初始化数组");
     }
     
     NSInteger pastScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
@@ -141,13 +142,13 @@
             if (![gamedata writeToFile:boardPath
                                options:NSDataWritingAtomic
                                  error:&error]) {
-                NSLog(@"Error writing file: %@", error);
+            
             }
             
             if (![sharedata writeToFile:sharePath
                                 options:NSDataWritingAtomic
                                   error:&error]) {
-                NSLog(@"Error writing file: %@", error);
+                
             }
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -160,11 +161,11 @@
             if ([fileManager fileExistsAtPath:boardPath] && [fileManager fileExistsAtPath:sharePath]) {
                 if (![fileManager removeItemAtPath:boardPath
                                              error:&error]) {
-                    NSLog(@"Error removing file: %@", error);
+                    
                 }
                 if (![fileManager removeItemAtPath:sharePath
                                              error:&error]) {
-                    NSLog(@"Error removing file: %@", error);
+                    
                 }
             }
             
@@ -182,13 +183,13 @@
             if (![gamedata writeToFile:boardPathAdd
                                options:NSDataWritingAtomic
                                  error:&error]) {
-                NSLog(@"Error writing file: %@", error);
+               
             }
             
             if (![sharedata writeToFile:sharePathAdd
                                 options:NSDataWritingAtomic
                                   error:&error]) {
-                NSLog(@"Error writing file: %@", error);
+                
             }
             
              [[NSUserDefaults standardUserDefaults] synchronize];
